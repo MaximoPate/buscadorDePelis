@@ -12,7 +12,7 @@ function App() {
   return (
     <>
       <SearchBar />
-      <MovieList titulo="Inception" />
+      <MovieList titulo="pixels" />
     </>
   )
 }
