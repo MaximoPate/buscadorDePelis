@@ -5,14 +5,20 @@ import heroImg from './assets/hero.png'
 import './App.css'
 import SearchBar from './components/SearchBar/Index.jsx'
 import MovieList from './components/MovieList/Index.jsx'
+import { Routes, Route } from 'react-router-dom'
+import MovieDetail from './components/MovieDetail/Index.jsx'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [busqueda, setBusqueda] = useState('')
+
 
   return (
     <>
-      <SearchBar />
-      <MovieList titulo="pixels" />
+      <SearchBar busqueda={busqueda} setBusqueda={setBusqueda} />
+      <Routes>
+        <Route path="/" element={<MovieList busqueda={busqueda} />} />
+        <Route path="/pelicula/:id" element={<MovieDetail />} />
+      </Routes>
     </>
   )
 }

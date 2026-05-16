@@ -1,9 +1,11 @@
 import "./MovieCard.css";
+import {useNavigate} from 'react-router-dom';
 
-function MovieCard({ poster, titulo, anio, type }) {
+function MovieCard({ poster, titulo, anio, type, id }) {
+  const navigate = useNavigate();
   return (
-    <div className="movie-card">
-      <img src={poster} alt={titulo} className="movie-poster" />
+    <div className="movie-card" onClick={() => navigate(`/pelicula/${id}`)}>
+      <img src={poster} alt={titulo}/>
       <h2 className="movie-titulo">{titulo}</h2>
       <p className="movie-info">{anio} - {type}</p>
     </div>

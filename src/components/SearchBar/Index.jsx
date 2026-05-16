@@ -1,10 +1,15 @@
 import React from 'react'
 import './SearchBar.css'
 
-export default function SearchBar() {
+function SearchBar({busqueda, setBusqueda}) {
   return (
-    <div className="search-bar">
-      <input className="search-input" placeholder="Search..." />
-    </div>
+      <input 
+        type="text" 
+        placeholder="Insertar nombre..." 
+        value={busqueda}
+        onChange={(e) => setBusqueda(e.target.value)}
+      />
   )
 }
+
+export default SearchBar

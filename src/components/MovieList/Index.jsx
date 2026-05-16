@@ -3,18 +3,20 @@ import axios from 'axios';
 import './MovieList.css';
 import MovieCard from '../MovieCard/Index.jsx';
 
-function MovieList({ titulo }) {
+function MovieList({ busqueda }) {
   const [peliculas, setPeliculas] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    if (!busqueda) return
+
     const fetchPeliculas = async () => {
       try {
         const responseMovies = await axios.get('https://www.omdbapi.com/', {
           params: {
             apikey: 'c1ab0597',
-            s: titulo
+            s: busqueda
           }
         })
         setPeliculas(responseMovies.data.Search || [])
@@ -25,7 +27,7 @@ function MovieList({ titulo }) {
       }
     }
     fetchPeliculas()
-  }, [])
+  }, [busqueda])
 
   
 return (
@@ -34,11 +36,12 @@ return (
       error ? <p>Error: {error}</p> :
       peliculas.length === 0 ? <p>No hay resultados</p> :
 
-      <section class="movie-list">
+      <section className="movie-list">
         {
           peliculas.map(pelicula => (
             <MovieCard 
               key={pelicula.imdbID}
+              id={pelicula.imdbID}
               poster={pelicula.Poster}
               titulo={pelicula.Title}
               anio={pelicula.Year}
